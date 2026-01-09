@@ -31,7 +31,14 @@ jobs:
         run: npm ci
 
       - name: Build Expo web
+        env:
+          EXPO_PUBLIC_PATH: "/${{ github.event.repository.name }}/"
         run: npx expo export --platform web --output-dir web-build
+
+      - name: Add Pages extras (nojekyll + 404 fallback)
+        run: |
+          touch web-build/.nojekyll
+          cp web-build/index.html web-build/404.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
