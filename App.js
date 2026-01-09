@@ -11,7 +11,7 @@ import {
   Image,
   Alert
 } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { useState, useEffect } from "react";
 import { auth } from "./firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
@@ -19,6 +19,14 @@ import { db } from './firebaseConfig';
 import { collection, addDoc, getDocs, deleteDoc, doc, query, where } from "firebase/firestore";
 
 export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
 
   // --- Auth + UI state ---
   const [user, setUser] = useState(null);
