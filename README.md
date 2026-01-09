@@ -2,6 +2,8 @@
 
 Simple budget tracker with email auth and Firestore persistence.
 
+🌐 **Live Demo**: [https://aditya3525.github.io/ExpenseTracker/](https://aditya3525.github.io/ExpenseTracker/)
+
 ## Prerequisites
 - Node.js LTS
 - Expo CLI (`npm install -g expo-cli`)
