@@ -213,14 +213,22 @@ export default function App() {
   }, 0);
 
   const confirmDelete = (id) => {
-    Alert.alert(
-      "Delete Expense",
-      "Are you sure you want to delete this expense?",
-      [
-        { text: "Cancel", style: "cancel" },
-        { text: "Delete", style: "destructive", onPress: () => handleRemoveExpense(id) }
-      ]
-    );
+    if (Platform.OS === 'web') {
+      // Use browser's native confirm dialog on web
+      if (window.confirm("Are you sure you want to delete this expense?")) {
+        handleRemoveExpense(id);
+      }
+    } else {
+      // Use React Native Alert on mobile
+      Alert.alert(
+        "Delete Expense",
+        "Are you sure you want to delete this expense?",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Delete", style: "destructive", onPress: () => handleRemoveExpense(id) }
+        ]
+      );
+    }
   };
   const isDisabled = expenseTitle.trim().length === 0 || expenseAmount.trim().length === 0;
   return (
